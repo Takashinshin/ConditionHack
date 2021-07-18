@@ -1,0 +1,12 @@
+@charset "UTF-8";
+.form-login{
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
+}
+
+.app-title{
+	background: skyblue;
+	border-radius: 7px;
+}
