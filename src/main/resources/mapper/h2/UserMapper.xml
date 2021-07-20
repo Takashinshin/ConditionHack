@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.repository.UserMapper">
+
+<!-- マッピング定義 -->
+<resultMap type="com.example.model.MUser" id="user">
+	<id column="user_id" property="userId"/>
+	<result column="password" property="password"/>
+	<result column="user_name" property="userName"/>
+	<result column="birthday" property="birthday"/>
+	<result column="age" property="age"/>
+	<result column="gender" property="gender"/>
+	<result column="role" property="role"/>
+</resultMap>
+
+<!-- ユーザー1件登録 -->
+<insert id="insertOne">
+	INSERT INTO m_user(
+		user_id, password, user_name, 
+		birthday, age, gender, role
+	) VALUES(
+		#{userId}, #{password}, #{userName}, 
+		#{birthday}, #{age}, #{gender}, #{role}
+		)
+</insert>
+
+<select id="findMany" resultType="MUser">
+	SELECT
+		*
+	FROM
+		m_user
+</select>
+
+<select id="findOne" resultMap="user">
+	SELECT
+		*
+	FROM
+		m_user
+	WHERE
+		user_id = #{userId}
+</select>
+<update id="updateOne" >
+	UPDATA
+		m_user
+	SET
+		password = #{password}
+		user_name = #{userName}
+	WHERE
+		user_id = #{userId}	
+</update>
+<delete id="deleteOne">
+	DELETE FROM
+		m_user
+	WHERE
+		user_id = #{userId}
+
+</delete>
+
+
+
+
+</mapper>

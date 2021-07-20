@@ -14,17 +14,16 @@
 </head>
 <body class="bg-light">
 	<div class="text-center">
-		<form method="post" th:action="@{/login}" class="form-login">
+	<form method="post" th:action="@{/login}" class="form-login">
   	<h2 class="app-title">ConditionHack App</h2>
-  	<h2>ログイン</h2>
   	<!-- ユーザーID -->
   	<div class="form-group">
-  		<label for="userId"></label>
+  		<label for="userId">ユーザーID</label>
   		<input type="text" name="userId" class="form-control" placeholder="ユーザーID"/>	
   	</div>
   	<!-- パスワード -->
   	<div class="form-group">
-  		<label for="password"></label>
+  		<label for="password">パスワード</label>
   		<input type="text" name="password" class="form-control" placeholder="パスワード"/>	
   	</div>
   	<input type="submit" value="ログイン" class="btn btn-primary"/>

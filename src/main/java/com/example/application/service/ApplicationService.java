@@ -16,5 +16,15 @@ public class ApplicationService {
 		
 		return genderMap;
 	}
+	
+	//管理者のMapを生成する
+	public Map<String, Integer> getRoleMap(){
+		Map<String, Integer> roleMap = new LinkedHashMap<>();
+		
+		roleMap.put("管理者ユーザー", 1);
+		roleMap.put("一般ユーザー", 2);
+		
+		return roleMap;
+	}
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapperとxmlフォイルのマッピング -->
+<mapper namespace="com.example.repository.UserDataMapper">
+
+
+<!-- マッピングの定義（SQLのu_dataとJava(model)のUDataクラス） -->
+<resultMap type="com.example.model.UData" id="udata">
+	<id column="user_id" property="userId" />
+	<id column="data_date" property="dataDate" />
+	<result column="condition" property="condition"/>
+	<result column="weight" property="weight"/>
+	<result column="sleep_time" property="sleepTime"/>
+	<result column="kcal" property="kcal"/>
+</resultMap>
+
+<select id="findAllData" resultMap="udata">
+	SELECT
+		*
+	FROM
+		u_data
+	WHRER
+		user_id = #{userId}
+</select>
+
+</mapper>
