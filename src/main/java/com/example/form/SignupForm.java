@@ -1,6 +1,6 @@
 package com.example.form;
 
-import java.util.Date;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,7 +17,7 @@ public class SignupForm {
 	private String userName;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date birthday;
+	private String birthday;
 	
 	private Integer age;
 	

@@ -14,14 +14,14 @@ public interface UserMapper {
 	public int insertOne(MUser user);
 	
 	//ユーザー複数検索
-	public List<MUser> findMany();
+	public List<MUser> findMany(MUser user);
 	
 	//ユーザー1件取得
 	public MUser findOne(String userId);
 	
 	//ユーザー更新
 	public void updateOne(@Param("userId")String userId,
-						  @Param("passwoed")String password,
+						  @Param("password")String password,
 						  @Param("userName")String userName
 						  );
 	

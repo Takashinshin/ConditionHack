@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService{
 	
 	//ユーザー検索
 	@Override
-	public List<MUser> getUsers() {
-		 return userMapper.findMany();
+	public List<MUser> getUsers(MUser user) {
+		 return userMapper.findMany(user);
 	}
 	
 	//ユーザー1件検索
@@ -33,6 +33,15 @@ public class UserServiceImpl implements UserService{
 		return userMapper.findOne(userId);
 		
 	}
-	
 
+	@Override
+	public void updateUserOne(String userId, String password, String userName) {
+		userMapper.updateOne(userId, password, userName);
+	}
+
+	@Override
+	public void deleteUserOne(String userId) {
+		int count =  userMapper.deleteOne(userId);
+
+	}
 }

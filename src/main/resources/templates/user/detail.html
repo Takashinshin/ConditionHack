@@ -14,7 +14,8 @@
     <div class="header border-bottom">
       <h1 class="h2">ユーザー一覧詳細</h1>
     </div>
-    <form id="user-detail-form" method="POST" th:action="@{/user/userdetail}" class="form-signup" th:object="${userDetailForm}">
+    <form id="user-detail-form" method="POST" th:action="@{/user/detail}" class="form-signup" th:object="${userDetailForm}">
+      <input type="hidden" th:field="*{userId}">
       <!-- ユーザー詳細情報 -->
       <table class="table table-striped table-bordered table-hover">
         <tbody>
@@ -48,10 +49,44 @@
           </tr>
           <tr>
             <th>権限</th>
-            <td th:text="*{role == 1 ? '管理ユーザー' : '一般ユーザー'}"></td>
+            <td th:text="*{role == 1 ? '管理者ユーザー' : '一般ユーザー'}"></td>
           </tr>
         </tbody>
       </table>
+      <!-- ボタンエリア -->
+      <div class="text-center">
+        <!-- 更新ボタン -->
+        <button class="btn btn-primary" type="submit" name="update">更新</button>
+        <!-- 消去ボタン -->
+        <button class="btn btn-danger" type="submit" name="delete">消去</button>
+      </div>
+      <!-- ユーザーデータ情報 -->
+      <th:block>
+        <div class="header border-bottom">
+        <!-- th:if="*{dataList != null and dataList.size() > 0}" -->
+          <h1 class="h2">データ記録</h1>
+        </div>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th class="w-25">日程</th>
+              <th>体調</th>
+              <th>体重</th>
+              <th>睡眠時間</th>
+              <th>カロリー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item: *{dataList}">
+              <td th:text="${#dates.format(item.dataDate, 'YYYY/MM/dd')}"></td>
+              <td th:text="${item.weight}"></td>
+              <td th:text="${item.condition}"></td>
+              <td th:text="${item.sleepTime}"></td>
+              <td th:text="${item.kcal}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </th:block>
     </form>
   </div>
 </body>

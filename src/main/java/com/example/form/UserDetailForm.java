@@ -1,6 +1,9 @@
 package com.example.form;
 
 import java.util.Date;
+import java.util.List;
+
+import com.example.model.UData;
 
 import lombok.Data;
 
@@ -20,6 +23,6 @@ public class UserDetailForm {
 	
 	private Integer role;
 	
+	private List<UData> dataList;
 	
-
 }

@@ -6,9 +6,23 @@
 </head>
 <body>
   <div layout:fragment="content">
-    <div class="header border-bottom">
-      <h1 class="h2">My Page</h1>
+    <div class="header border-bottom mb-2">
+      <h1 class="h1">My Page</h1>
     </div>
+    
+  	<div class="mb-4">
+      <form id="user-search-form" method="POST" th:action="@{/user/top}" class="form-inline" th:object="${userListForm}">
+        <div class="form-group">
+          <label for="userId" class="mr-4">ユーザーID</label>
+          <input type="text" class="form-control" th:field="*{userId}">
+        </div>
+        <div class="form-group mx-sm-3">
+          <label for="userName" class="mr-2">ユーザー名</label>
+          <input type="text" class="form-control" th:field="*{userName}">
+        </div>
+        <button class="btn btn-primary" type="submit">検索</button>
+      </form>
+    </div> 
 
     <!-- ユーザーデータ一覧 -->
     <table class="table tabel-striped table-bordered table-hover">
@@ -31,8 +45,9 @@
           <td th:text="${item.age}"></td>
           <td th:text="${item.gender == 1} ? '男性':'女性'"></td>
           <td th:text="${item.role == 1} ? '管理者':'一般'"></td>
+          
           <td>
-          	<a class="btn btn-primary" th:href="@{'/user/userdetail/'+${item.userId}}">詳細</a>
+          	<a class="btn btn-primary" th:href="@{'/user/detail/'+${item.userId}}">詳細</a>
           </td>
         </tr>
       </tbody>
