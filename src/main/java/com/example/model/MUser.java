@@ -27,6 +27,9 @@ public class MUser {
 	
 	private Integer role;
 	
-	private List<UData> dataList;
+	private Region region;
+	
+	
+	
 
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.application.service.ApplicationService;
 import com.example.form.UserDetailForm;
 import com.example.model.MUser;
 import com.example.service.UserService;
@@ -32,7 +31,6 @@ public class UserDetailController {
 		user.setPassword(null);
 		
 		form = modelMapper.map(user, UserDetailForm.class);
-		form.setDataList(user.getDataList());
 		
 		model.addAttribute("userDetailForm", form);
 		

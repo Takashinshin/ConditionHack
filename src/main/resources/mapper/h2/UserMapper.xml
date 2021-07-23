@@ -14,25 +14,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="age" property="age"/>
 	<result column="gender" property="gender"/>
 	<result column="role" property="role"/>
-	<collection property="dataList"  ofType="com.example.model.UData">
-		<id column="user_id" property="userId"/>
-		<id column="data_date" property="dataDate"/>
-		<result column="condition" property="condition"/>
-		<result column="weight" property="weight"/>
-		<result column="sleep_time" property="sleepTime"/>
-		<result column="kcal" property="kcal"/>
-	</collection>
+	<association property="region" resultMap="region"/>
+	<!-- <collection property="dataList" resultMap="u_data" columnPrefix="u_data_"/> -->
+</resultMap>
+
+<!-- マッピング定義（地域） -->
+<resultMap type="com.example.model.Region" id="region">
+	<id column="region_id" property="regionId"/>
+	<result column="region_name" property="regionName"/>
 </resultMap>
 
 <!-- マッピング定義（データ情報） -->
-<!-- <resultMap type="com.example.model.UData" id="data">
+<!-- <resultMap type="com.example.model.UData" id="u_data">
 	<id column="user_id" property="userId"/>
 	<id column="data_date" property="dataDate"/>
 	<result column="condition" property="condition"/>
 	<result column="weight" property="weight"/>
 	<result column="sleep_time" property="sleepTime"/>
 	<result column="kcal" property="kcal"/>
-</resultMap> -->
+</resultMap>
+ -->
 
 <!-- マッピング定義（ユーザーゴール） -->
 <!-- <resultMap type="com.example.model.UGoal" id="ugoal">
@@ -72,27 +73,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ユーザー1件検索 -->
 <select id="findOne" resultMap="user">
 	SELECT
-		m_user.user_id,
-		m_user.password,
-		m_user.user_name,
-		m_user.birthday,
-		m_user.age,
-		m_user.gender,
-		m_user.role,
-		u_data.user_id,
-		u_data.data_date,
-		u_data.condition,
-		u_data.weight as data_weight,
-		u_data.sleep_time as data_sleepTime,
-		u_data.kcal as data_kcal
-	FROM 
+		*
+	from 
 		m_user
-	LEFT JOIN 
-		u_data
+	left join m_region
 	ON 
-		m_user.user_id = u_data.user_id
-	WHERE
-		m_user.user_id = #{userId}
+		m_user.region_id = m_region.region_id
+	where 
+		user_id = #{userId}
 </select>
 
 <update id="updateOne" >
@@ -111,7 +99,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		user_id = #{userId}
 </delete>
-
-
-
 </mapper>
