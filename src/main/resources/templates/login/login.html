@@ -16,6 +16,10 @@
 	<div class="text-center">
 	<form method="post" th:action="@{/login}" class="form-login">
   	<h2 class="app-title">ConditionHack App</h2>
+  	<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+  	   th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+  	   class="text-danger">ログインエラーメッセージ</p>
+  	
   	<!-- ユーザーID -->
   	<div class="form-group">
   		<label for="userId">ユーザーID</label>
@@ -28,7 +32,7 @@
   	</div>
   	<input type="submit" value="ログイン" class="btn btn-primary"/>
   </form>
-  <a th:href="@{/user/signup}">新規登録はこちら</a>
+  <a th:href="@{/admin/signup}">新規登録はこちら</a>
 </div>
 </body>
 </html>

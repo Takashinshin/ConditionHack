@@ -16,7 +16,7 @@ import com.example.model.MUser;
 import com.example.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin")
 public class TopController {
 	
 	@Autowired
@@ -38,7 +38,7 @@ public class TopController {
 		model.addAttribute("userList", userList);
 		
 		//ユーザー一覧画面を表示
-		return "user/top";
+		return "admin/top";
 	}
 	
 	//ユーザー検索処理
@@ -53,7 +53,7 @@ public class TopController {
 		//Modelに格納
 		model.addAttribute("userList ", userList);
 		
-		return "user/top";
+		return "admin/top";
 	}
 
 }

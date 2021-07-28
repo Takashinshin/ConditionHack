@@ -22,10 +22,14 @@ public interface UserMapper {
 	//ユーザー更新
 	public void updateOne(@Param("userId")String userId,
 						  @Param("password")String password,
-						  @Param("userName")String userName
+						  @Param("userName")String userName,
+						  @Param("role")String role
 						  );
 	
 	//ユーザー消去
 	public int deleteOne(@Param("userId")String userId);
+	
+	//ログインユーザー取得
+	public MUser findLoginUser(String userId);
 
 }

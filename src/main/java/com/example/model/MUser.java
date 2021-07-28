@@ -25,11 +25,13 @@ public class MUser {
 	
 	private Integer gender;
 	
-	private Integer role;
+	private String role;
 	
-	private Region region;
+	private Region regionId;
 	
+	private List<UData> dataList;
 	
+	private UGoal userGoal;
 	
 
 }

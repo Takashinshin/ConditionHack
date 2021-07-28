@@ -20,7 +20,7 @@ import com.example.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin")
 @Slf4j
 public class SignupController {
 	
@@ -41,12 +41,12 @@ public class SignupController {
 		Map<String, Integer> genderMap =applicationService.getGenderMap();
 		model.addAttribute("genderMap", genderMap);	
 		
-		//管理者Mapを取得
-		Map<String, Integer> roleMap = applicationService.getRoleMap();
-		model.addAttribute("roleMap", roleMap);
+		//regionのMapを取得する
+		Map<String, Integer> regionMap = applicationService.getRegionMap();
+		model.addAttribute("regionMap", regionMap);
 		
 		//画面遷移
-		return "user/signup";
+		return "admin/signup";
 	}
 	
 	//ユーザー登録処理
@@ -56,7 +56,7 @@ public class SignupController {
 		//model.addattribute("signupForm", form)があるイメージ
 		//入力チェック
 		if(bindingResult.hasErrors()) {
-			return "/user/signup";
+			return "/admin/signup";
 		}
 		//ログ出力
 		log.info(form.toString());

@@ -5,6 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.example.repository.UserMapper">
 
+
+
 <!-- マッピング定義(ユーザー)-->
 <resultMap type="com.example.model.MUser" id="user">
 	<id column="user_id" property="userId"/>
@@ -14,8 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="age" property="age"/>
 	<result column="gender" property="gender"/>
 	<result column="role" property="role"/>
-	<association property="region" resultMap="region"/>
-	<!-- <collection property="dataList" resultMap="u_data" columnPrefix="u_data_"/> -->
+	<association property="regionId" resultMap="region"/>
+	<association property="userGoal" resultMap="goal" columnPrefix="goal_"/>
+	<collection property="dataList" resultMap="data" columnPrefix="data_"/>
 </resultMap>
 
 <!-- マッピング定義（地域） -->
@@ -24,8 +27,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="region_name" property="regionName"/>
 </resultMap>
 
+<!-- マッピング定義（ユーザーゴール） -->
+<resultMap type="com.example.model.UGoal" id="goal">
+	<id column="user_id" property="userId" />
+	<result column="goal_weight" property="goalWeight"/>
+	<result column="goal_date" property="goalDate"/>
+</resultMap>
+
 <!-- マッピング定義（データ情報） -->
-<!-- <resultMap type="com.example.model.UData" id="u_data">
+<resultMap type="com.example.model.UData" id="data">
 	<id column="user_id" property="userId"/>
 	<id column="data_date" property="dataDate"/>
 	<result column="condition" property="condition"/>
@@ -33,24 +43,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="sleep_time" property="sleepTime"/>
 	<result column="kcal" property="kcal"/>
 </resultMap>
- -->
-
-<!-- マッピング定義（ユーザーゴール） -->
-<!-- <resultMap type="com.example.model.UGoal" id="ugoal">
-	<id column="user_id" property="userId" />
-	<result column="goal_weight" property="goalWeight"/>
-	<result column="goal_date" property="goalDate"/>
-</resultMap> -->
 
 
 <!-- ユーザー1件登録 -->
 <insert id="insertOne">
 	INSERT INTO m_user(
-		user_id, password, user_name, 
-		birthday, age, gender, role
+		user_id,
+		password, 
+		user_name, 
+		birthday, 
+		age, 
+		gender, 
+		role, 
+		region_id
 	) VALUES(
 		#{userId}, #{password}, #{userName}, 
-		#{birthday}, #{age}, #{gender}, #{role}
+		#{birthday}, #{age}, #{gender}, #{role}, #{regionId}
 		)
 </insert>
 
@@ -62,10 +70,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		m_user
 	<where>
 		<if test="userId != null">
-			user_id like #{userId}
+			user_id like '%' || #{userId} || '%'
 		</if>
 		<if test="userName != null">
-			AND user_name like #{userName} 
+			and user_name like '%' ||  #{userName} || '%' 
 		</if>
 	</where>
 </select>
@@ -73,30 +81,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ユーザー1件検索 -->
 <select id="findOne" resultMap="user">
 	SELECT
-		*
+		m_user.user_id,
+		m_user.password,
+		m_user.user_name,
+		m_user.birthday,
+		m_user.age,
+		m_user.gender,
+		m_user.role,
+		u_region.region_id,
+		u_region.region_name,
+		u_data.user_id as data_user_id,
+		u_data.data_date as data_data_date,
+		u_data.condition as data_condition,
+		u_data.weight as data_weight,
+		u_data.sleep_time as data_sleep_time,
+		u_data.kcal as data_kcal,
+		u_goal.user_id as goal_user_id,
+		u_goal.goal_weight as goal_goal_weight,
+		u_goal.goal_date as goal_goal_date
 	from 
 		m_user
-	left join m_region
+	left join u_region
 	ON 
-		m_user.region_id = m_region.region_id
+		m_user.region_id = u_region.region_id
+		
+	left join u_data
+	ON
+		m_user.user_id = u_data.user_id
+		
+	left join u_goal
+	ON 
+		m_user.user_id = u_goal.user_id
 	where 
-		user_id = #{userId}
+		m_user.user_id = #{userId}
 </select>
 
+<!--  ユーザー1件更新-->
 <update id="updateOne" >
 	UPDATE
 		m_user
 	SET
 		password = #{password},
-		user_name = #{userName}
+		user_name = #{userName},
+		role = #{role}
 	WHERE
 		user_id = #{userId}	
 </update>
 
+<!-- ユーザー1件消去 -->
 <delete id="deleteOne">
 	DELETE FROM
 		m_user
 	WHERE
 		user_id = #{userId}
 </delete>
+
+
+<!-- ログインユーザー取得 -->
+<select id="findLoginUser" resultType="MUser">
+	select
+		*
+	from
+		m_user
+	where
+		user_id = #{userId}
+</select>
 </mapper>

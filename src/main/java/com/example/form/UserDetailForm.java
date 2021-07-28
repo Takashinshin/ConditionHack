@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.example.model.Region;
 import com.example.model.UData;
+import com.example.model.UGoal;
 
 import lombok.Data;
+
 
 @Data
 public class UserDetailForm {
@@ -22,8 +24,12 @@ public class UserDetailForm {
 	
 	private Integer gender;
 	
-	private Integer role;
+	private String role;
 	
 	private Region region;
+	
+	private List<UData> dataList;
+	
+	private UGoal userGoal;
 	
 }
