@@ -10,7 +10,7 @@
         <a class="nav-link" th:href="@{/admin/top}">ユーザー一覧画面</a>
       </li>
       <li role="presentation" sec:authorize="hasRole('ADMIN')">
-        <a class="nav-link" th:href="@{'/admin'}">アドミン専用</a>
+        <a class="nav-link" th:href="@{'/admin'}">管理者専用</a>
       </li>
     </ul>
   </div>
