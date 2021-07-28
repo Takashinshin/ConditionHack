@@ -43,7 +43,7 @@ public class TopController {
 	
 	//ユーザー検索処理
 	@PostMapping("/top")
-	public String postUserList(@ModelAttribute UserListForm form, Model model) {
+	public String postUserData(@ModelAttribute UserListForm form, Model model) {
 		//formをMUserクラスに変換
 		MUser user = modelMapper.map(form, MUser.class);
 		
@@ -51,7 +51,7 @@ public class TopController {
 		List<MUser> userList = userService.getUsers(user);
 		
 		//Modelに格納
-		model.addAttribute("userList ", userList);
+		model.addAttribute("userList", userList);
 		
 		return "admin/top";
 	}

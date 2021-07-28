@@ -64,16 +64,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- ユーザー全件検索 -->
 <select id="findMany" resultType="MUser">
-	SELECT
+	select
 		*
-	FROM
+	from
 		m_user
 	<where>
 		<if test="userId != null">
-			user_id like '%' || #{userId} || '%'
+			(user_id like '%${userId}%') 
 		</if>
 		<if test="userName != null">
-			and user_name like '%' ||  #{userName} || '%' 
+			and (user_name like '%${userName}%') 
 		</if>
 	</where>
 </select>
