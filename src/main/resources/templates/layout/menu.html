@@ -6,11 +6,17 @@
 <body>
   <div layout:fragment="menu" class="bg-light">
     <ul class="nav nav-pills nav-stacked">
-      <li role="presentation">
-        <a class="nav-link" th:href="@{/admin/top}">ユーザー一覧画面</a>
+      <li role="presentation" sec:authorize="hasRole('ADMIN')" class="mb-4">
+        <a class="btn btn-info" th:href="@{'/admin/admin'}">管理者専用</a>
       </li>
-      <li role="presentation" sec:authorize="hasRole('ADMIN')">
-        <a class="nav-link" th:href="@{'/admin'}">管理者専用</a>
+      <li role="presentation" class="mb-4">
+        <a class="btn btn-info">データー入力</a>
+      </li>
+      <li role="presentation" class="mb-4">
+        <a  class="btn btn-info">目標登録</a>
+      </li>
+      <li role="presentation">
+        <a class="nav-link btn btn-info">ユーザー編集</a>
       </li>
     </ul>
   </div>

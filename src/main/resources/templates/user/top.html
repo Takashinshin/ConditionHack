@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>マイページ</title>
+<!-- <link rel="stylesheet" th:href="@{/css/user/top}"> -->
 </head>
 <body>
-
+  <div layout:fragment="content">
+    <div class="header border-bottom mb-2">
+      <h1 class="h2">My Page</h1>
+    </div>
+    <div class="text-center">
+    	<h1>Condition Hack</h1>
+    	<p>左のタブより「体調管理」「目標体重」「ユーザー情報の編集」などが行えます</p>
+    </div>
+    
+    <form id="user-detail-form" method="POST" class="form-signup" th:object="${loginUser}">
+     	<input type="hidden" th:field="*{userId}">
+     	<table class="table table-striped table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="w-25">ユーザーID</th>
+            <td th:text="*{userId}"></td>
+          </tr>
+          <tr>
+            <th>ユーザー名</th>
+            <td th:text="*{userName}"></td>
+          </tr>
+          <tr>
+            <th>目標体重</th>
+            <td>
+            	<span th:if="*{userGoal != null}" th:text="|*{userGoal.goalWeight}(kg)|"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+    
+    <!-- ここにu_dataの各自データを取得 -->
+     <th:block th:if="*{dataList != null and dataList.size() > 0}">
+        <div class="header border-bottom">
+          <h1 class="h2">データ記録</h1>
+        </div>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th class="w-25">日程</th>
+              <th>体調</th>
+              <th>体重</th>
+              <th>睡眠時間</th>
+              <th>カロリー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item: *{dataList}">
+              <td th:text="${#dates.format(item.dataDate, 'YYYY/MM/dd')}"></td>
+              <td th:text="${item.condition}"></td>
+              <td th:text="|${item.weight}(kg)|"></td>
+              <td th:text="${item.sleepTime}"></td>
+              <td th:text="${item.kcal}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </th:block> 
+     </form>
+  </div>
 </body>
 </html>

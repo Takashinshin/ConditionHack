@@ -37,7 +37,7 @@ public class UserDetailsServiceImple implements UserDetailsService{
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(authority);
 		
-		//UserDetails作成
+		//UserDetails作成(ログインしたユーザーのユーザーID、パスワード、権限を取得)
 		UserDetails userDetails = (UserDetails)new User(loginUser.getUserId(), loginUser.getPassword(), authorities);
 		
 		return userDetails;

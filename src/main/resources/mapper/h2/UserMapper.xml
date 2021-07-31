@@ -5,8 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.example.repository.UserMapper">
 
-
-
 <!-- マッピング定義(ユーザー)-->
 <resultMap type="com.example.model.MUser" id="user">
 	<id column="user_id" property="userId"/>
@@ -48,18 +46,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ユーザー1件登録 -->
 <insert id="insertOne">
 	INSERT INTO m_user(
-		user_id,
-		password, 
-		user_name, 
-		birthday, 
-		age, 
-		gender, 
-		role, 
-		region_id
+		user_id,　password, user_name, birthday, age, gender, role, region_id
 	) VALUES(
-		#{userId}, #{password}, #{userName}, 
-		#{birthday}, #{age}, #{gender}, #{role}, #{regionId}
+		#{userId}, #{password}, #{userName}, #{birthday}, #{age}, #{gender}, #{role}, #{regionId}
 		)
+		
+		
 </insert>
 
 <!-- ユーザー全件検索 -->
@@ -121,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	UPDATE
 		m_user
 	SET
-		password = #{password},
+		<!-- password = #{password}, -->
 		user_name = #{userName},
 		role = #{role}
 	WHERE
@@ -146,4 +138,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where
 		user_id = #{userId}
 </select>
+
+<!-- データー入力 -->
+<insert id="insertData" >
+	
+</insert>
+
+
 </mapper>

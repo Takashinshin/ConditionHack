@@ -13,11 +13,11 @@
 </head>
 <body class="bg-light">
 		<!-- formクラス作成してデータ入力→登録 -->
-  <form action="/admin/signup" method="POST" class="form-signup" th:object="${signupForm}">
+  <form action="/user/signup" method="POST" class="form-signup" th:object="${signupForm}">
   <div class="text-center">
-  	<h2 class="app-title">ConditionHack App</h2>
-  	<h2 class="text-center" th:text="#{user.signup.title}">ユーザー登録</h2>
-   </div>
+    <h2 class="app-title">ConditionHack App</h2>
+    <h2 class="text-center" th:text="#{user.signup.title}">ユーザー登録</h2>
+  </div>
     <!-- ユーザーID -->
     <div class="form-group">
       <label for="userId" th:text="#{userId}">ユーザーID</label>
@@ -63,11 +63,9 @@
     <div class="form-group">
       <label for="pet-select">居住地域を選択して下さい。</label><br>
       <select id="singleSelec" name="regionMaps" >
-     	<option value="">----</option>
-     	<option th:each="item : ${regionMap}" 
-     			th:value="${item.value}" 
-     			th:text="|${item.value}.${item.key} |"></option>
-     </select>
+        <option value="">----</option>
+        <option th:each="item : ${regionMap}" th:value="${item.value}" th:text="|${item.value}.${item.key} |"></option>
+      </select>
     </div>
     
     <!-- 管理者登録 -->

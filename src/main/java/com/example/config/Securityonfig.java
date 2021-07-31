@@ -44,7 +44,7 @@ public class Securityonfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 				.antMatchers("/").permitAll()//直リンクOK
-				.antMatchers("/admin/signup").permitAll()//
+				.antMatchers("/user/signup").permitAll()//
 				.antMatchers("/admin").hasAuthority("ROLE_ADMIN")//権限制限
 				.anyRequest().authenticated();//上以外は直リンク禁止
 		//後で Apptop.htmlも直リンクOKに入れる。
@@ -58,7 +58,7 @@ public class Securityonfig extends WebSecurityConfigurerAdapter{
 				.failureUrl("/login?login")//ログイン失敗時の遷移先
 				.usernameParameter("userId")//ログインページのユーザーID
 				.passwordParameter("password")//ログインページのパスワード
-				.defaultSuccessUrl("/admin/top", true);//ログイン成功時の遷移先
+				.defaultSuccessUrl("/user/top", true);//ログイン成功時の遷移先
 		
 		//ログアウト処理
 		http
@@ -89,7 +89,8 @@ public class Securityonfig extends WebSecurityConfigurerAdapter{
 		
 		//ユーザーデーター認証
 		auth
-			.userDetailsService(userDetailsService).passwordEncoder(encoder);
+			.userDetailsService(userDetailsService)
+			.passwordEncoder(encoder);
 	}
 	
 

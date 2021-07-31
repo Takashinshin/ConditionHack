@@ -1,6 +1,5 @@
 package com.example.service.impl;
 
-import java.security.KeyStore.PrivateKeyEntry;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +45,13 @@ public class UserServiceImpl implements UserService{
 	//ユーザー1件更新
 	@Transactional
 	@Override
-	public void updateUserOne(String userId, String password, String userName, String role) {
+	public void updateUserOne(String userId, String userName, String role) {
 		//パスワード暗号化
-		String enctyptPassword = encoder.encode(password);
+		//String enctyptPassword = encoder.encode(password);
+		//String password, 
+		// enctyptPassword, 
 		
-		userMapper.updateOne(userId, enctyptPassword, userName, role);
+		userMapper.updateOne(userId, userName, role);
 	}
 
 	//ユーザー1件消去
@@ -65,6 +66,9 @@ public class UserServiceImpl implements UserService{
 	public MUser getLoginUser(String userId) {
 		return userMapper.findLoginUser(userId);
 	}
+	
+	//各自ユーザーデーター取得
+	
 	
 	
 	

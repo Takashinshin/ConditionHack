@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.model.MUser;
+import com.example.model.UData;
 
 @Mapper
 public interface UserMapper {
@@ -21,7 +22,7 @@ public interface UserMapper {
 	
 	//ユーザー更新
 	public void updateOne(@Param("userId")String userId,
-						  @Param("password")String password,
+						  //@Param("password")String password,
 						  @Param("userName")String userName,
 						  @Param("role")String role
 						  );
@@ -31,5 +32,8 @@ public interface UserMapper {
 	
 	//ログインユーザー取得
 	public MUser findLoginUser(String userId);
+	
+	//各自データー登録
+	public UData insertData(String userId);
 
 }
